@@ -1,21 +1,62 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+// @flow
+
+import * as React from 'react';
+import type { Element, } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+
+import RouteWithProps from './routeComponents/RouteWIthProps';
+import HomeRoute from './routeComponents/HomeRoute';
+import SearchRoute from './routeComponents/SearchRoute';
+
 import './App.css';
 
-class App extends Component {
-    render() {
+import type { AppStateType } from './rootReducer';
+
+type MappedStatePropsType = {||};
+type MappedDispatchPropsType = {||};
+type OwnPropsType = {||};
+type PropsType = MappedStatePropsType & MappedDispatchPropsType & OwnPropsType;
+
+class App extends React.Component<PropsType> {
+    constructor(props: PropsType) {
+        super(props);
+    }
+
+    componentDidMount() {
+    }
+
+    componentDidUpdate(prevProps: PropsType) {
+
+    }
+
+    render(): Element<'div'> {
         return (
             <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
+                <main>
+                    <RouteWithProps
+                        exact
+                        path="/"
+                        component={HomeRoute}
+                    />
+                    <RouteWithProps
+                        exact
+                        path="/search"
+                        component={SearchRoute}
+                    />
+                </main>
             </div>
         );
     }
 }
 
-export default App;
+const mapStateToProps = (state: AppStateType): MappedStatePropsType => ({
+});
+
+const mapDispatchToProps = (dispatch: *): MappedDispatchPropsType => ({
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
