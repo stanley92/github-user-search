@@ -7,7 +7,7 @@ import { push } from 'react-router-redux';
 
 import RouteWithProps from './routeComponents/RouteWIthProps';
 import HomeRoute from './routeComponents/HomeRoute';
-import SearchRoute from './routeComponents/SearchRoute';
+import SearchRoute from './routeComponents/SearchResultRoute';
 
 import './App.css';
 
@@ -40,8 +40,7 @@ class App extends React.Component<PropsType> {
                         component={HomeRoute}
                     />
                     <RouteWithProps
-                        exact
-                        path="/search"
+                        path="/search/:user"
                         component={SearchRoute}
                     />
                 </main>

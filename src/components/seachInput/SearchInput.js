@@ -3,6 +3,7 @@
 import * as React from 'react';
 import type { Element } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import './searchInput.css';
 import type { AppStateType } from '../../rootReducer';
@@ -15,6 +16,11 @@ type OwnPropsType = {||};
 type PropsType = MappedStatePropsType & MappedDispatchPropsType & OwnPropsType;
 
 class SearchInput extends React.Component<PropsType> {
+    constructor(props: PropsType) {
+        super(props);
+
+        this.resetInputValue = this.resetInputValue.bind(this);
+    }
     onKeyUp = (e: Event) => {
         if (e.keyCode === 13) {
             this.onSearchClick();
@@ -27,6 +33,10 @@ class SearchInput extends React.Component<PropsType> {
         // TODO - Dispatch Action to Start Searching
         onSearchClicked(this.input.value);
     };
+
+    resetInputValue()  {
+        this.input.value = '';
+    }
 
     render(): Element<'div'> {
         return (
@@ -47,10 +57,13 @@ const mapStateToProps = (state: AppStateType): MappedStatePropsType => ({});
 const mapDispatchToProps = (dispatch: *): MappedDispatchPropsType => ({
     onSearchClicked: (input: string) => {
         console.log('To dispatch Search');
+        dispatch(push(`/search/${input}`));
     }
 });
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
+    null,
+    {withRef: true}
 )(SearchInput);

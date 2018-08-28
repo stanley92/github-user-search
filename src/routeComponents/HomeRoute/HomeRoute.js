@@ -14,14 +14,6 @@ type PropsType = MappedStatePropsType & MappedDispatchPropsType & OwnPropsType;
 type StateType = {||};
 
 class HomeRoute extends React.Component<PropsType, StateType> {
-    componentDidMount() {
-        fetch('https://api.github.com/search/users?q=stanley92')
-            .then(response => response.json())
-            .then((data) => {
-                console.log('Checking Data : ', data);
-            });
-    }
-
     render(): Element<'div'> {
         return (
             <div className="row">
