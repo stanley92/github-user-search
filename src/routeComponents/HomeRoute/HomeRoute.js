@@ -5,6 +5,7 @@ import type { Element } from 'react';
 import { connect } from 'react-redux';
 
 import type { AppStateType } from '../../rootReducer';
+import SearchInput from '../../components/seachInput/SearchInput';
 
 type MappedStatePropsType = {||};
 type MappedDispatchPropsType = {};
@@ -13,10 +14,20 @@ type PropsType = MappedStatePropsType & MappedDispatchPropsType & OwnPropsType;
 type StateType = {||};
 
 class HomeRoute extends React.Component<PropsType, StateType> {
+    componentDidMount() {
+        fetch('https://api.github.com/search/users?q=stanley92')
+            .then(response => response.json())
+            .then((data) => {
+                console.log('Checking Data : ', data);
+            });
+    }
+
     render(): Element<'div'> {
         return (
-            <div>Home</div>
-        )
+            <div className="row">
+                <SearchInput />
+            </div>
+        );
     }
 }
 
