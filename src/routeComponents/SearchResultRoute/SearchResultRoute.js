@@ -103,8 +103,7 @@ class SearchResultRoute extends React.Component<PropsType, StateType> {
         console.log('Checking states : ', this.state);
         return (
             <div className="search-result-wrapper">
-                <div>To being Searching</div>
-                <SearchInput ref={node => this.input = node} />
+                <SearchInput ref={input => this.input = input} />
                 <SearchResultList
                     searchResults={this.state.searchResults}
                     onResultClick={this.onResultClick}

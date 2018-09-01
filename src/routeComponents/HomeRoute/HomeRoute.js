@@ -16,9 +16,7 @@ type StateType = {||};
 class HomeRoute extends React.Component<PropsType, StateType> {
     render(): Element<'div'> {
         return (
-            <div className="row">
-                <SearchInput />
-            </div>
+            <SearchInput />
         );
     }
 }

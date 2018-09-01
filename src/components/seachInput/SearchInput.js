@@ -30,18 +30,19 @@ class SearchInput extends React.Component<PropsType> {
     onSearchClick = () => {
         const { onSearchClicked } = this.props;
         console.log('This.onSearch Click : ', this.input.value);
-        // TODO - Dispatch Action to Start Searching
-        onSearchClicked(this.input.value);
+        if (this.input.value.trim().length > 0) {
+            onSearchClicked(this.input.value.trim());
+        }
     };
 
-    resetInputValue()  {
+    resetInputValue() {
         this.input.value = '';
     }
 
     render(): Element<'div'> {
         return (
             <div className="search-input-wrapper">
-                <div className="row text-input-wrapper">
+                <div className="text-input-wrapper">
                     <input
                         className="text-input col-8 col-sm-8 col-md-8"
                         ref={input => this.input = input}
@@ -65,5 +66,5 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps,
     null,
-    {withRef: true}
+    { withRef: true }
 )(SearchInput);
