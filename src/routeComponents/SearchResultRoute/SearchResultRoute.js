@@ -5,6 +5,7 @@ import type { Element } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import ReactPaginate from 'react-paginate';
+import Spinner from 'react-spinkit';
 
 import type { AppStateType } from '../../rootReducer';
 import SearchInput from '../../components/seachInput/SearchInput';
@@ -102,27 +103,41 @@ class SearchResultRoute extends React.Component<PropsType, StateType> {
         });
     };
 
+    renderLoading = () => (
+        <div className="loading-in-progress">
+            <Spinner name="ball-spin-fade-loader" />
+        </div>
+    );
+
     render(): Element<'div'> {
         console.log('Checking states : ', this.state);
+
         return (
             <div className="search-result-wrapper">
                 <SearchInput ref={input => this.input = input} />
-                <SearchResultList
-                    searchResults={this.state.searchResults}
-                    onResultClick={this.onResultClick}
-                />
-                <ReactPaginate
-                    previousLabel="previous"
-                    nextLabel="next"
-                    breakClassName="break-me"
-                    pageCount={this.state.totalPages}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={this.onPageChange}
-                    containerClassName="pagination"
-                    subContainerClassName="pages pagination"
-                    activeClassName="active"
-                />
+                {
+                    this.state.isLoading ?
+                        this.renderLoading()
+                        :
+                        <div>
+                            <SearchResultList
+                                searchResults={this.state.searchResults}
+                                onResultClick={this.onResultClick}
+                            />
+                            <ReactPaginate
+                                previousLabel="previous"
+                                nextLabel="next"
+                                breakClassName="break-me"
+                                pageCount={this.state.totalPages}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={this.onPageChange}
+                                containerClassName="pagination"
+                                subContainerClassName="pages pagination"
+                                activeClassName="active"
+                            />
+                        </div>
+                }
             </div>
         );
     }

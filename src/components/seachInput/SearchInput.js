@@ -8,6 +8,8 @@ import { push } from 'react-router-redux';
 import './searchInput.css';
 import type { AppStateType } from '../../rootReducer';
 
+import githubLogo from '../../assets/github.png';
+
 type MappedStatePropsType = {||};
 type MappedDispatchPropsType = {
     onSearchClicked: (input: string) => void
@@ -42,13 +44,14 @@ class SearchInput extends React.Component<PropsType> {
     render(): Element<'div'> {
         return (
             <div className="search-input-wrapper">
+                <img className="logo" src={githubLogo} alt="github-logo" />
                 <div className="text-input-wrapper">
                     <input
-                        className="text-input col-8 col-sm-8 col-md-8"
+                        className="text-input"
                         ref={input => this.input = input}
                         onKeyUp={this.onKeyUp}
                     />
-                    <button onClick={() => this.onSearchClick()}>Search</button>
+                    <button className="search-button" onClick={() => this.onSearchClick()}>Search</button>
                 </div>
             </div>
         );
