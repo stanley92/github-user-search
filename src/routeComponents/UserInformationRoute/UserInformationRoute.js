@@ -133,6 +133,20 @@ class UserInformationRoute extends React.Component<PropsType, StateType> {
         });
     };
 
+    renderJsonResult = () => {
+        const { user } = this.state;
+
+        if (!user) return null;
+
+        const result = JSON.stringify(user, null, 4);
+        return (
+            <div>
+                <header>User Results</header>
+                <pre>{result}</pre>
+            </div>
+        );
+    }
+
     renderUserDetails = () => {
         const {
             user, repos, followers, following
@@ -146,13 +160,13 @@ class UserInformationRoute extends React.Component<PropsType, StateType> {
                 {this.renderResultTable(repos)}
                 {this.renderResultTable(followers)}
                 {this.renderResultTable(following)}
+                {this.renderJsonResult()}
             </div>
 
         );
     };
 
     renderResultTable = (data) => {
-        console.log('Checking data :', data);
         if (data && data.data && data.data.length > 0) {
             return (
                 <div className="user-information-result-table-wrapper">
