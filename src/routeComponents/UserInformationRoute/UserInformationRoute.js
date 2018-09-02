@@ -3,6 +3,7 @@
 import * as React from 'react';
 import type { Element } from 'react';
 import { connect } from 'react-redux';
+import Spinner from 'react-spinkit';
 
 import type { AppStateType } from '../../rootReducer';
 import SearchInput from '../../components/seachInput/SearchInput';
@@ -140,8 +141,8 @@ class UserInformationRoute extends React.Component<PropsType, StateType> {
 
         const result = JSON.stringify(user, null, 4);
         return (
-            <div>
-                <header>User Results</header>
+            <div className="user-result-wrapper">
+                <h1 className="user-result-information-header">User Results</h1>
                 <pre>{result}</pre>
             </div>
         );
@@ -155,8 +156,7 @@ class UserInformationRoute extends React.Component<PropsType, StateType> {
         if (!user) return null;
 
         return (
-            <div>
-                <div>{user.login}</div>
+            <div className="user-information-wrapper">
                 {this.renderResultTable(repos)}
                 {this.renderResultTable(followers)}
                 {this.renderResultTable(following)}
@@ -170,20 +170,20 @@ class UserInformationRoute extends React.Component<PropsType, StateType> {
         if (data && data.data && data.data.length > 0) {
             return (
                 <div className="user-information-result-table-wrapper">
-                    <header>{data.name}</header>
+                    <h1 className="user-information-header">{data.name}</h1>
                     <table className="user-information-result-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
+                        <thead className="table-header-wrapper">
+                            <tr className="table-row">
+                                <th className="index">#</th>
+                                <th className="username">Name</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="table-body-wrapper">
                             {
                                 data.data.map((value, index) => (
-                                    <tr key={index}>
-                                        <td>{index + 1}</td>
-                                        <td>{value}</td>
+                                    <tr className="table-row" key={index}>
+                                        <td className="index">{index + 1}</td>
+                                        <td className="username">{value}</td>
                                     </tr>
                                 ))
                             }
@@ -195,15 +195,22 @@ class UserInformationRoute extends React.Component<PropsType, StateType> {
         return null;
     };
 
+    renderLoading = () => (
+        <div className="loading-in-progress">
+            <Spinner name="ball-spin-fade-loader" />
+        </div>
+    );
+
     render(): Element<'div'> {
-        console.log('Checking this.state : ', this.state);
-
-        if (this.state.isLoading) return null;
-
         return (
             <div className="search-result-wrapper">
                 <SearchInput ref={input => this.input = input} />
-                { this.renderUserDetails() }
+                {
+                    this.state.isLoading ?
+                        this.renderLoading()
+                        :
+                        this.renderUserDetails()
+                }
             </div>
         );
     }

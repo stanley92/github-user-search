@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import type { AppStateType } from '../../rootReducer';
 import SearchInput from '../../components/seachInput/SearchInput';
 
+import './homeRoute.css';
+
 type MappedStatePropsType = {||};
 type MappedDispatchPropsType = {};
 type OwnPropsType = {};
@@ -16,7 +18,9 @@ type StateType = {||};
 class HomeRoute extends React.Component<PropsType, StateType> {
     render(): Element<'div'> {
         return (
-            <SearchInput />
+            <div className="home-wrapper">
+                <SearchInput />
+            </div>
         );
     }
 }
