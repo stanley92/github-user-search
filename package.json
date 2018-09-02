@@ -1,6 +1,9 @@
 {
-  "name": "my-app",
+  "name": "github-user-search",
   "version": "0.1.0",
+  "repository": "https://github.com/stanley92/github-user-search.git",
+  "author": "Stanley Ong <stanley92@hotmail.com>",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "bootstrap": "4.1.1",
