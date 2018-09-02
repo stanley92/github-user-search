@@ -8,6 +8,7 @@ import { push } from 'react-router-redux';
 import RouteWithProps from './routeComponents/RouteWIthProps';
 import HomeRoute from './routeComponents/HomeRoute';
 import SearchRoute from './routeComponents/SearchResultRoute';
+import UserInformationRoute from './routeComponents/UserInformationRoute';
 
 import './App.css';
 
@@ -42,6 +43,10 @@ class App extends React.Component<PropsType> {
                     <RouteWithProps
                         path="/search/:user"
                         component={SearchRoute}
+                    />
+                    <RouteWithProps
+                        path="/userInformation/:username"
+                        component={UserInformationRoute}
                     />
                 </main>
             </div>

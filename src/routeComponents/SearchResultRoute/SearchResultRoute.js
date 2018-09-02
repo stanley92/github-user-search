@@ -3,6 +3,7 @@
 import * as React from 'react';
 import type { Element } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import ReactPaginate from 'react-paginate';
 
 import type { AppStateType } from '../../rootReducer';
@@ -67,6 +68,8 @@ class SearchResultRoute extends React.Component<PropsType, StateType> {
 
     onResultClick = (resultItem: Object) => {
         console.log('In onSearchResult Click : ', resultItem);
+        const { openUserInformation } = this.props;
+        openUserInformation(resultItem.login);
     };
 
     getSearchTerm = (): string => {
@@ -128,7 +131,9 @@ class SearchResultRoute extends React.Component<PropsType, StateType> {
 const mapStateToProps = (state: AppStateType): MappedStatePropsType => ({
     pathName: state.routing.location.pathname
 });
-const mapDispatchToProps = (dispatch: *): MappedDispatchPropsType => ({});
+const mapDispatchToProps = (dispatch: *): MappedDispatchPropsType => ({
+    openUserInformation: (userName: string) => dispatch(push(`/userInformation/${userName}`))
+});
 
 export default connect(
     mapStateToProps,
