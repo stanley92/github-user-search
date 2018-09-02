@@ -110,8 +110,6 @@ class SearchResultRoute extends React.Component<PropsType, StateType> {
     );
 
     render(): Element<'div'> {
-        console.log('Checking states : ', this.state);
-
         return (
             <div className="search-result-wrapper">
                 <SearchInput ref={input => this.input = input} />

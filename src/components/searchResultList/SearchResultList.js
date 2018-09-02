@@ -18,7 +18,7 @@ const SearchResultList = ({ searchResults, onResultClick }: PropsType): Element<
                 <thead className="table-header-wrapper">
                     <tr className="table-row">
                         <th className="index">#</th>
-                        <th className="avatar">avatar</th>
+                        <th className="avatar">Avatar</th>
                         <th className="username">Username</th>
                     </tr>
                 </thead>
